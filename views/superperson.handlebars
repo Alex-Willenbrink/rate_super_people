@@ -80,7 +80,7 @@
 {{#if user}}
   <div class="row">
     <div class="col-xs-12">
-      <form action="/vote" method="post">
+      <form action="/superpeople/{{superPerson._id}}" method="post">
         <h4>Please Enter Super hero Ratings</h4>
         <div class="form-group">
           <div class="row">
@@ -89,7 +89,7 @@
             </div>
 
             <div class="col-xs-2">
-              <input name="intelligence" type="text" class="form-control" />
+              <input type="text" class="form-control" name="rating[intelligenceRating]" />
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@
               <label for="strength">Strength 1 - 10</label>
             </div>
             <div class="col-xs-2">
-              <input type="text" class="form-control" />
+              <input type="text" class="form-control" name="rating[strengthRating]" />
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@
             </div>
 
             <div class="col-xs-2">
-              <input type="text" class="form-control" />
+              <input type="text" class="form-control" name="rating[speedRating]" />
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@
               <label for="durability">Durability 1 - 10</label>
             </div>
             <div class="col-xs-2">
-              <input type="text" class="form-control" />
+              <input type="text" class="form-control" name="rating[durabilityRating]" />
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
               <label for="energy">Energy Proj 1 - 10</label>
             </div>
             <div class="col-xs-2">
-              <input type="text" class="form-control" />
+              <input type="text" class="form-control" name="rating[energyProjectionRating]" />
             </div>
           </div>
         </div>
@@ -146,11 +146,11 @@
             </div>
 
             <div class="col-xs-2">
-              <input type="text" class="form-control" />
+              <input type="text" class="form-control" name="rating[likeabilityRating]" />
             </div>
           </div>
         </div>
-
+        <button type="submit" class="btn btn-default">Submit</button>
       </form>
     </div>
   </div>

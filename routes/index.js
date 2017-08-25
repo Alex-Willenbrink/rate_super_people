@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
       name: new RegExp(`${superName}`, "i")
     });
 
-    return res.render("landing", { people });
+    return res.render("landing", { people, user: req.user });
   } catch (err) {
     console.log("error with superpeople");
     return res.send(err);

@@ -5,7 +5,6 @@ module.exports = {
   local: new LocalStrategy(async function(email, password, done) {
     try {
       const user = await User.findOne({ email: email });
-      console.log("trying to authenticate");
       if (!user)
         throw new Error("Error: No User by that email in the database");
 
