@@ -53,6 +53,7 @@ beginConnection
   .catch(err => console.error(error));
 
 // seed database with superpeople
+require("./seeds/superpeople")();
 
 // set up passport and local strategy
 const passport = require("passport");
