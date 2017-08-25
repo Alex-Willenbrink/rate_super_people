@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const VoteSchema = mongoose.Schema({
+const VoteSchema = Schema({
   voter: {
     type: Schema.Types.ObjectId,
     ref: "User"

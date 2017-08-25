@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const SuperpersonSchema = mongoose.Schema({
+const SuperpersonSchema = Schema({
   votes: [
     {
       type: Schema.Types.ObjectId,

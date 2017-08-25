@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const uniqueValidator = require("mongoose-unique-validator");
 
-const UserSchema = mongoose.Schema({
+const UserSchema = Schema({
   email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
   votes: {
