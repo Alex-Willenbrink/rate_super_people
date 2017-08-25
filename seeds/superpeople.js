@@ -47,6 +47,7 @@ module.exports = function() {
     try {
       let marvelJson = await JSON.parse(body);
       let parsedMarvel = await parseMarvelQuery(marvelJson.data.results);
+
       parsedMarvel.forEach(superPerson => {
         new Superperson(superPerson).save();
       });
