@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const bluebird = require("bluebird");
-// const passport = require("passport");
 mongoose.Promise = bluebird;
-// const { User } = require("../models");
+const { User } = require("../models");
 const router = require("express").Router();
 const passport = require("passport");
 
@@ -15,8 +14,10 @@ const loggedOutOnly = (req, res, next) => {
 };
 
 router.get("/", (req, res) => {
+  console.log("session: ", req.session.user);
+  console.log("req.user: ", req.user);
   // make logic here
-  res.render("landing");
+  res.render("landing", { user: req.user });
 });
 
 router.get("/login", loggedOutOnly, (req, res) => {
@@ -24,6 +25,7 @@ router.get("/login", loggedOutOnly, (req, res) => {
 });
 
 router.get("/logout", loggedInOnly, (req, res) => {
+  req.session.user = null;
   req.logout();
   res.redirect("/");
 });
@@ -58,8 +60,8 @@ router.post("/register", loggedOutOnly, async (req, res) => {
     }
 
     const user = new User({
-      email: req.body.email,
-      password: req.body.password,
+      email: email,
+      password: password,
       votes: []
     });
     await user.save();

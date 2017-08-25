@@ -1,0 +1,19 @@
+<nav class="navbar bg-primary">
+  <div class="col-xs-4">
+    <a class="navbar-brand nav-text" href="">Super People Rankings</a>
+  </div>
+  <div class="col-xs-4">
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search for Super People">
+      <button class="btn btn-success" type="submit">Search</button>
+    </form>
+  </div>
+  <div class="col-xs-2 col-xs-offset-2 text-right">
+    {{#if user}}
+      <a class="navbar-brand nav-text log-option text-a" href="/logout">Log Out</a>
+    {{else}}
+      <a class="navbar-brand nav-text log-option" href="/register">Register</a>
+      <a class="navbar-brand nav-text log-option" href="/login">Login</a>
+    {{/if}}
+  </div>
+</nav>
