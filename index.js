@@ -1,6 +1,6 @@
 // Set up process variables
 require("dotenv").config();
-const { MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY, DB_URL } = process.env;
+const { DB_URL } = process.env;
 
 // Set up express
 const express = require("express");
@@ -51,6 +51,8 @@ beginConnection
     console.log("Super People DB Connection Success");
   })
   .catch(err => console.error(error));
+
+// seed database with superpeople
 
 // set up passport and local strategy
 const passport = require("passport");

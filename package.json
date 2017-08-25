@@ -26,6 +26,7 @@
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.5",
+    "md5": "^2.2.1",
     "mongoose": "^4.11.8",
     "mongoose-unique-validator": "^1.0.5",
     "passport": "^0.4.0",
