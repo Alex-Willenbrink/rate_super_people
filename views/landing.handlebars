@@ -3,3 +3,29 @@
     <h1 class="text-center">Rate Super People</h1>
   </div>
 </div>
+
+{{#if people}}
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <h2 class="text-center text-danger">Super People Search Results</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each people as |person|}}
+      <tr>
+        <td style="width: 100px;"><img src="{{person.smallImageUrl}}"/></td>
+        <td><a href="/superpeople/{{person._id}}">{{person.name}}</a></td>
+        <td><p>{{person.description}}</p></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  </div>
+</div>
+{{/if}}

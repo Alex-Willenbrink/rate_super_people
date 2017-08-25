@@ -70,6 +70,9 @@ passport.deserializeUser(deserializeUser);
 const indexRoutes = require("./routes/index");
 app.use("/", indexRoutes);
 
+const superpeopleRoutes = require("./routes/superpeople");
+app.use("/superpeople", superpeopleRoutes);
+
 // Start ze server
 const port = 3000;
 

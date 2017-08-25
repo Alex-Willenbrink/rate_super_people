@@ -1,23 +1,33 @@
 const mongoose = require("mongoose");
 const bluebird = require("bluebird");
 mongoose.Promise = bluebird;
-const { User } = require("../models");
+const { User, Superperson } = require("../models");
 const router = require("express").Router();
 const passport = require("passport");
-
-const loggedInOnly = (req, res, next) => {
-  return req.isAuthenticated() ? next() : res.redirect("/");
-};
-
-const loggedOutOnly = (req, res, next) => {
-  return !req.isAuthenticated() ? next() : res.redirect("/");
-};
+const { loggedInOnly, loggedOutOnly } = require("../middleware");
 
 router.get("/", (req, res) => {
   console.log("session: ", req.session.user);
   console.log("req.user: ", req.user);
   // make logic here
   res.render("landing", { user: req.user });
+});
+
+router.post("/", async (req, res) => {
+  let superName = req.body.search;
+  console.log(superName);
+  if (!superName) return redirect("/");
+
+  try {
+    let people = await Superperson.find({
+      name: new RegExp(`${superName}`, "i")
+    });
+
+    return res.render("landing", { people });
+  } catch (err) {
+    console.log("error with superpeople");
+    return res.send(err);
+  }
 });
 
 router.get("/login", loggedOutOnly, (req, res) => {
