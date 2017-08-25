@@ -40,8 +40,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // Set up mongoose here
 const mongoose = require("mongoose");
 const bluebird = require("bluebird");
-
 mongoose.Promise = bluebird;
+
 const beginConnection = mongoose.connect(DB_URL, {
   useMongoClient: true
 });
@@ -53,36 +53,36 @@ beginConnection
   .catch(err => console.error(error));
 
 // set up passport and local strategy
-const passport = require("passport");
-app.use(passport.initialize());
-app.use(passport.session());
-
-const LocalStrategy = require("passport-local").Strategy;
-const { User } = require("./models");
-
-passport.use(
-  new LocalStrategy(async function(email, password, done) {
-    try {
-      const user = await User.findOne({ email: email });
-      if (!user)
-        throw new Error("Error: No User by that email in the database");
-
-      if (!user.validatePassword(password))
-        throw new Error("Error: Passwords do not match");
-    } catch (err) {
-      done(err);
-    }
-  })
-);
-
-const serializeUser = (user, done) => done(err, user.id);
-const deserializeUser = (id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-};
-passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
+// const passport = require("passport");
+// app.use(passport.initialize());
+// app.use(passport.session());
+//
+// const LocalStrategy = require("passport-local").Strategy;
+// const { User } = require("./models");
+//
+// passport.use(
+//   new LocalStrategy(async function(email, password, done) {
+//     try {
+//       const user = await User.findOne({ email: email });
+//       if (!user)
+//         throw new Error("Error: No User by that email in the database");
+//
+//       if (!user.validatePassword(password))
+//         throw new Error("Error: Passwords do not match");
+//     } catch (err) {
+//       done(err);
+//     }
+//   })
+// );
+//
+// const serializeUser = (user, done) => done(err, user.id);
+// const deserializeUser = (id, done) => {
+//   User.findById(id, (err, user) => {
+//     done(err, user);
+//   });
+// };
+// passport.serializeUser(serializeUser);
+// passport.deserializeUser(deserializeUser);
 
 // Routes
 const indexRoutes = require("./routes/index");

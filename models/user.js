@@ -6,10 +6,12 @@ const uniqueValidator = require("mongoose-unique-validator");
 const UserSchema = Schema({
   email: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
-  votes: {
-    type: Schema.Types.ObjectId,
-    ref: "Vote"
-  }
+  votes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Vote"
+    }
+  ]
 });
 
 UserSchema.plugin(uniqueValidator);
