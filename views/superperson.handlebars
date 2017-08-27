@@ -89,7 +89,20 @@
             </div>
 
             <div class="col-xs-2">
-              <input type="text" class="form-control" name="rating[intelligenceRating]" />
+              <input id="slider-strength" type="text"
+                data-slider-min="0"
+                ata-slider-max="10"
+                data-slider-step="1"
+                data-slider-value="5"
+                data-slider-ticks="[0,1,2,3,4,5,6,7,8,9,10]"
+                data-slider-ticks-labels="[0,1,2,3,4,5,6,7,8,9,10]"
+              />
+                <script>
+                  $(document).ready(function() {
+                    // With JQuery
+                    $("#slider-strength").slider();
+                  });
+                </script>
             </div>
           </div>
         </div>
