@@ -31,47 +31,6 @@
           </div>
         </div>
 
-        <div class="progress">
-            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-            {{#if superPerson.rating.speed}} style="width:{{superPerson.rating.speed}}%" {{else}} style="width:50%"{{/if}}>
-            <p>
-              Speed Rating
-            </p>
-            <span class="sr-only"></span>
-          </div>
-        </div>
-
-        <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-            {{#if superPerson.rating.durability}} style="width:{{superPerson.rating.durability}}%" {{else}} style="width:50%"{{/if}}>
-            <p>
-              Durability Rating
-            </p>
-            <span class="sr-only"></span>
-          </div>
-        </div>
-
-        <div class="progress">
-            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-            {{#if superPerson.rating.energy}} style="width:{{superPerson.rating.energy}}%" {{else}} style="width:50%"{{/if}}>
-            <p>
-              Energy Projections Rating
-            </p>
-            <span class="sr-only"></span>
-          </div>
-        </div>
-
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-            {{#if superPerson.rating.like}} style="width:{{superPerson.rating.like}}%" {{else}} style="width:50%"{{/if}}>
-            <p>
-              Likeability Rating
-            </p>
-            <span class="sr-only"></span>
-          </div>
-        </div>
-
-
       </div>
     </div>
   </div>
@@ -80,16 +39,18 @@
 {{#if user}}
   <div class="row">
     <div class="col-xs-12">
+
       <form action="/superpeople/{{superPerson._id}}" method="post">
         <h4>Please Enter Super hero Ratings</h4>
         <div class="form-group">
           <div class="row">
+
             <div class="col-xs-2">
-              <label for="intelligence">Intelligence 1 - 10</label>
+              <label>Intelligence</label>
             </div>
 
             <div class="col-xs-2">
-              <input id="slider-strength" type="text"
+              <input name="rating[intelligence]" id="slider-intelligence" type="text"
                 data-slider-min="0"
                 ata-slider-max="10"
                 data-slider-step="1"
@@ -97,12 +58,6 @@
                 data-slider-ticks="[0,1,2,3,4,5,6,7,8,9,10]"
                 data-slider-ticks-labels="[0,1,2,3,4,5,6,7,8,9,10]"
               />
-                <script>
-                  $(document).ready(function() {
-                    // With JQuery
-                    $("#slider-strength").slider();
-                  });
-                </script>
             </div>
           </div>
         </div>
@@ -110,61 +65,23 @@
         <div class="form-group">
           <div class="row">
             <div class="col-xs-2">
-              <label for="strength">Strength 1 - 10</label>
+              <label>Strength</label>
             </div>
             <div class="col-xs-2">
-              <input type="text" class="form-control" name="rating[strengthRating]" />
-            </div>
+              <input name="rating[strength]" id="slider-strength" type="text"
+                data-slider-min="0"
+                ata-slider-max="10"
+                data-slider-step="1"
+                data-slider-value="5"
+                data-slider-ticks="[0,1,2,3,4,5,6,7,8,9,10]"
+                data-slider-ticks-labels="[0,1,2,3,4,5,6,7,8,9,10]"
+              />
           </div>
         </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="speed">Speed 1 - 10</label>
-            </div>
-
-            <div class="col-xs-2">
-              <input type="text" class="form-control" name="rating[speedRating]" />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="durability">Durability 1 - 10</label>
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" name="rating[durabilityRating]" />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="energy">Energy Proj 1 - 10</label>
-            </div>
-            <div class="col-xs-2">
-              <input type="text" class="form-control" name="rating[energyProjectionRating]" />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="row">
-            <div class="col-xs-2">
-              <label for="likeability">Likeability 1 - 10</label>
-            </div>
-
-            <div class="col-xs-2">
-              <input type="text" class="form-control" name="rating[likeabilityRating]" />
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>
+  <script src="/scripts/sliders.js"></script>
 {{/if}}
