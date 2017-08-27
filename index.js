@@ -1,6 +1,6 @@
 // Set up process variables
 require("dotenv").config();
-const { DB_URL } = process.env;
+const { DB_URL, MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY } = process.env;
 
 // Set up express
 const express = require("express");
@@ -37,23 +37,11 @@ app.set("view engine", "handlebars");
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 
-// Set up mongoose here
-const mongoose = require("mongoose");
-const bluebird = require("bluebird");
-mongoose.Promise = bluebird;
+// set up database with mlab (mongoose as the ORM)
+require("./config")(DB_URL);
 
-const beginConnection = mongoose.connect(DB_URL, {
-  useMongoClient: true
-});
-
-beginConnection
-  .then(db => {
-    console.log("Super People DB Connection Success");
-  })
-  .catch(err => console.error(error));
-
-// seed database with superpeople
-require("./seeds/superpeople")();
+// seed database
+require("./seeds/superpeople")(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY);
 
 // set up passport and local strategy
 const passport = require("passport");
