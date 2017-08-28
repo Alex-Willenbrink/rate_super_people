@@ -14,10 +14,14 @@ const VoteSchema = Schema({
   },
   intelligence: {
     type: Number,
+    min: 0,
+    max: 10,
     required: true
   },
   strength: {
     type: Number,
+    min: 0,
+    max: 10,
     required: true
   }
   // speedRating: {

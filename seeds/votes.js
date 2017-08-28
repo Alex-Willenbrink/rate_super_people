@@ -14,20 +14,32 @@ const seedVotes = async function() {
           superperson: superPerson.id,
           intelligence: Math.floor(Math.random() * 11),
           strength: Math.floor(Math.random() * 11)
-        }).save()
+        })
       );
     }
+  }
+
+  for (let vote of votes) {
+    let existingVote = await Vote.findOne({
+      superperson: vote.superperson,
+      voter: vote.voter
+    });
+
+    if (existingVote) {
+      existingVote.intelligence = vote.intelligence;
+      existingVote.strength = vote.strength;
+      vote = existingVote;
+    }
+    vote.save();
   }
 
   await Promise.all(votes);
 
   // insert votes into correct users
   for (let user of users) {
-    let userVotes = await Votes.find({
+    let userVotes = await Vote.find({
       voter: user.id
     }).select("id");
-
-    console.log(userVotes);
 
     user.votes = userVotes;
     user.save();
@@ -35,13 +47,14 @@ const seedVotes = async function() {
 
   // insert votes into correct super people
   for (let superPerson of superPeople) {
-    let superPersonVotes = await Votes.find({
+    let superPersonVotes = await Vote.find({
       superperson: superPerson.id
     }).select("id");
 
     superPerson.votes = superPersonVotes;
     superPerson.save();
   }
+  console.log("Votes Added to Database");
 };
 
 module.exports = seedVotes;
