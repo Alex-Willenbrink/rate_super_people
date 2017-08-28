@@ -54,7 +54,7 @@ const seedVotes = async function() {
     superPerson.votes = superPersonVotes;
     superPerson.save();
   }
-  console.log("Votes Added to Database");
+  console.log("All Votes Added to Database");
 };
 
 module.exports = seedVotes;

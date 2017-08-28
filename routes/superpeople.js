@@ -20,7 +20,6 @@ router.get("/:superId", persistUserViewInfo, async (req, res) => {
 });
 
 router.post("/:superId", async (req, res) => {
-  // const voteTypes = ["intelligence", "strength"];
   const userId = req.user.id;
   const superId = req.params.superId;
   const voteInfo = req.body.rating;
