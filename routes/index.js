@@ -4,13 +4,14 @@ mongoose.Promise = bluebird;
 const { User, Superperson } = require("../models");
 const router = require("express").Router();
 const passport = require("passport");
-const { loggedInOnly, loggedOutOnly } = require("../middleware");
+const {
+  loggedInOnly,
+  loggedOutOnly,
+  persistUserViewInfo
+} = require("../middleware");
 
-router.get("/", (req, res) => {
-  console.log("session: ", req.session.user);
-  console.log("req.user: ", req.user);
-  // make logic here
-  res.render("landing", { user: req.user });
+router.get("/", persistUserViewInfo, (req, res) => {
+  res.render("landing");
 });
 
 router.post("/", async (req, res) => {
@@ -35,17 +36,20 @@ router.get("/login", loggedOutOnly, (req, res) => {
 });
 
 router.get("/logout", loggedInOnly, (req, res) => {
-  req.session.user = null;
   req.logout();
+  req.session.user = null;
   res.redirect("/");
 });
 
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
     failureRedirect: "/login"
-  })
+  }),
+  (req, res) => {
+    req.session.user = req.user;
+    res.redirect("/");
+  }
 );
 
 router.post("/logout", (req, res) => {

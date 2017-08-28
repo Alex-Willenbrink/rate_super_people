@@ -3,12 +3,11 @@ const bluebird = require("bluebird");
 mongoose.Promise = bluebird;
 const { User, Superperson, Vote } = require("../models");
 const router = require("express").Router();
+const { persistUserViewInfo } = require("../middleware");
 
-router.get("/:superId", async (req, res) => {
+router.get("/:superId", persistUserViewInfo, async (req, res) => {
   try {
     let superPerson = await Superperson.findById(req.params.superId);
-    res.locals.user = req.user;
-
     return res.render("superperson", { superPerson });
   } catch (err) {
     return res.send(err);
