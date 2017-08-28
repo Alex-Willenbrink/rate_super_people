@@ -13,7 +13,7 @@ router.get("/:superId", persistUserViewInfo, async (req, res) => {
     const superPerson = await Superperson.findById(req.params.superId);
     const ratings = await findSuperPersonRatings(req.params.superId);
     console.log(ratings);
-    return res.render("superperson", { superPerson });
+    return res.render("superperson", { superPerson, ratings });
   } catch (err) {
     return res.send(err);
   }
