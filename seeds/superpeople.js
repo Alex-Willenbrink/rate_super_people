@@ -27,10 +27,14 @@ const parseMarvelQuery = superData => {
   return superArray;
 };
 
-module.exports = async function(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY) {
+module.exports = async function(
+  MARVEL_PUBLIC_KEY,
+  MARVEL_PRIVATE_KEY,
+  queryLimit = Infinity
+) {
   const ts = 1;
   const hash = md5(`${ts}${MARVEL_PRIVATE_KEY}${MARVEL_PUBLIC_KEY}`);
-  const limit = 100;
+  const limit = !isNaN(queryLimit) && queryLimit < 100 ? queryLimit : 100;
   let offset = 0;
   let parsedMarvel;
 
@@ -56,8 +60,8 @@ module.exports = async function(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY) {
           parsedMarvel.length} to Database`
       );
 
-      offset += 100; // increment offset to query next 100 characters
-    } while (parsedMarvel.length === limit);
+      offset += limit;
+    } while (parsedMarvel.length >= limit && offset < queryLimit);
   } catch (err) {
     console.error(err);
   }

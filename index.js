@@ -40,8 +40,16 @@ app.use(express.static(path.join(__dirname, "public")));
 // set up database with mlab (mongoose as the ORM)
 require("./config")(DB_URL);
 
-// seed database **THIS TAKES A LOT OF TIME, ADD OPTION TO START STOP THIS LATER
-// require("./seeds/superpeople")(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY);
+// seed database with super people
+require("./seeds/superpeople")(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY, 10);
+
+// const seedUsers = require("./seeds/users");
+// seedUsers(10).then(users => {
+//   console.log(users);
+// });
+
+const seedVotes = require("./seeds/votes");
+seedVotes();
 
 // set up passport and local strategy
 const passport = require("passport");

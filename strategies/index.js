@@ -11,11 +11,8 @@ module.exports = {
       if (!user.validatePassword(password))
         throw new Error("Error: Passwords do not match");
 
-      console.log("Found an error");
       return done(null, user);
-      console.log("Found an error");
     } catch (err) {
-      console.log("Found an error");
       done(err);
     }
   }),
