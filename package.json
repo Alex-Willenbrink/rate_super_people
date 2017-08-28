@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Alex-Willenbrink/jul-furry-winner#readme",
   "dependencies": {
+    "async-request": "^1.2.0",
     "bcrypt": "^1.0.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -27,9 +28,11 @@
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.5",
+    "fetch": "^1.1.0",
     "md5": "^2.2.1",
     "mongoose": "^4.11.8",
     "mongoose-unique-validator": "^1.0.5",
+    "node-fetch": "^1.7.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   }
