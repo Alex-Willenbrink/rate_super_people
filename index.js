@@ -43,13 +43,12 @@ require("./config")(DB_URL);
 // seed database with super people
 require("./seeds/superpeople")(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY, 10);
 
-// const seedUsers = require("./seeds/users");
-// seedUsers(10).then(users => {
-//   console.log(users);
-// });
+// seed database with fake users
+const seedUsers = require("./seeds/users");
+seedUsers(10);
 
-const seedVotes = require("./seeds/votes");
-seedVotes();
+// const seedVotes = require("./seeds/votes");
+// seedVotes();
 
 // set up passport and local strategy
 const passport = require("passport");
