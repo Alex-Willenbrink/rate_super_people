@@ -14,19 +14,16 @@
         <p>
           Total Votes: {{ratings.length}}
         </p>
-        {{#each ratings as |rating|}}
 
+        <div id="ratings-bar-graph">
 
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="10"
-            style="width:{{rating.avg}}%" >
-            <p>
-              {{rating.type}} Rating
-            </p>
-            <span class="sr-only"></span>
-          </div>
         </div>
-        {{/each}}
+        <script>
+          const ratings = JSON.parse(decodeURIComponent("{{{ratingsJson}}}"));
+        </script>
+        
+        <script src="/scripts/bar_graph.js"></script>
+
         {{/if}}
       </div>
 

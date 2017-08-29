@@ -7,13 +7,16 @@ const { persistUserViewInfo } = require("../middleware");
 const { findSuperPersonRatings } = require("../controllers/superpeople");
 
 router.get("/:superId", persistUserViewInfo, async (req, res) => {
-  // const voteTypes = ["intelligence", "strength"];
-
   try {
     const superPerson = await Superperson.findById(req.params.superId);
     const ratings = await findSuperPersonRatings(req.params.superId);
     console.log(ratings);
-    return res.render("superperson", { superPerson, ratings });
+    // console.log(JSON.stringify(ratings));
+    return res.render("superperson", {
+      superPerson,
+      ratings,
+      ratingsJson: encodeURIComponent(JSON.stringify(ratings))
+    });
   } catch (err) {
     return res.send(err);
   }
