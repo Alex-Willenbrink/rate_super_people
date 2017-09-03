@@ -1,6 +1,7 @@
 const { Vote, Superperson, User } = require("../models");
 
 const seedVotes = async function() {
+  console.log("starting votes seeding");
   const superPeople = await Superperson.find();
   const users = await User.find();
   const votes = [];
@@ -13,7 +14,11 @@ const seedVotes = async function() {
           voter: user.id,
           superperson: superPerson.id,
           intelligence: Math.floor(Math.random() * 11),
-          strength: Math.floor(Math.random() * 11)
+          strength: Math.floor(Math.random() * 11),
+          speed: Math.floor(Math.random() * 11),
+          durability: Math.floor(Math.random() * 11),
+          energyProjections: Math.floor(Math.random() * 11),
+          likeability: Math.floor(Math.random() * 11)
         })
       );
     }
@@ -28,6 +33,10 @@ const seedVotes = async function() {
     if (existingVote) {
       existingVote.intelligence = vote.intelligence;
       existingVote.strength = vote.strength;
+      existingVote.intelligence = vote.speed;
+      existingVote.strength = vote.durability;
+      existingVote.intelligence = vote.energyProjections;
+      existingVote.strength = vote.likeability;
       vote = existingVote;
     }
     vote.save();

@@ -21,7 +21,7 @@
         <script>
           const ratings = JSON.parse(decodeURIComponent("{{{ratingsJson}}}"));
         </script>
-        
+
         <script src="/scripts/bar_graph.js"></script>
 
         {{/if}}
@@ -34,28 +34,28 @@
 {{#if user}}
   <div class="row">
     <div class="col-xs-12">
-
       <form action="/superpeople/{{superPerson._id}}" method="post">
-        <h4>Please Enter Super hero Ratings</h4>
+        <h4>Please Enter Super Ratings</h4>
+        {{#each user.vote as |vote|}}
         <div class="form-group">
           <div class="row">
-
             <div class="col-xs-2">
-              <label>Intelligence</label>
+              <label>{{vote.type}}</label>
             </div>
 
             <div class="col-xs-2">
-              <input name="rating[intelligence]" id="slider-intelligence" type="text"
+              <input name="voteRatings[{{vote.type}}]" class="slider-rating" id="slider-{{vote.type}}" type="text"
                 data-slider-min="0"
                 ata-slider-max="10"
                 data-slider-step="1"
-                data-slider-value="5"
+                data-slider-value="{{vote.rating}}"
                 data-slider-ticks="[0,1,2,3,4,5,6,7,8,9,10]"
                 data-slider-ticks-labels="[0,1,2,3,4,5,6,7,8,9,10]"
               />
             </div>
           </div>
         </div>
+        {{/each}}
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>

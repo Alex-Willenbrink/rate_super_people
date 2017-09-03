@@ -3,40 +3,40 @@ const bluebird = require("bluebird");
 mongoose.Promise = bluebird;
 const { User, Superperson, Vote } = require("../models");
 const router = require("express").Router();
-const { persistUserViewInfo } = require("../middleware");
-const { findSuperPersonRatings } = require("../controllers/superpeople");
+const { persistUserViewInfo, persistUserVoteInfo } = require("../middleware");
+const {
+  getSuperPersonRatings,
+  createOrUpdateUserVote
+} = require("../controllers/superpeople");
 
-router.get("/:superId", persistUserViewInfo, async (req, res) => {
-  try {
-    const superPerson = await Superperson.findById(req.params.superId);
-    const ratings = await findSuperPersonRatings(req.params.superId);
-    console.log(ratings);
-    // console.log(JSON.stringify(ratings));
-    return res.render("superperson", {
-      superPerson,
-      ratings,
-      ratingsJson: encodeURIComponent(JSON.stringify(ratings))
-    });
-  } catch (err) {
-    return res.send(err);
+router.get(
+  "/:superId",
+  persistUserViewInfo,
+  persistUserVoteInfo,
+  async (req, res) => {
+    try {
+      const superPerson = await Superperson.findById(req.params.superId);
+      const ratings = await getSuperPersonRatings(req.params.superId);
+      console.log("ratings: ", ratings);
+
+      return res.render("superperson", {
+        superPerson,
+        ratings,
+        ratingsJson: encodeURIComponent(JSON.stringify(ratings))
+      });
+    } catch (err) {
+      return res.send(err);
+    }
   }
-});
+);
 
 router.post("/:superId", async (req, res) => {
-  const userId = req.user.id;
-  const superId = req.params.superId;
-  const voteInfo = req.body.rating;
+  const voterId = req.user.id;
+  const superpersonId = req.params.superId;
+  const voteRatings = req.body.voteRatings;
 
   try {
-    let vote = {
-      voter: userId,
-      superperson: superId,
-      intelligence: parseInt(voteInfo.intelligence),
-      strength: parseInt(voteInfo.strength)
-    };
-
-    await new Vote(vote).save();
-
+    await createOrUpdateUserVote(voterId, superpersonId, voteRatings);
     return res.redirect(`/superpeople/${superId}`);
   } catch (err) {
     return res.send(err);

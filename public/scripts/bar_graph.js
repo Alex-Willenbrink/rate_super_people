@@ -3,10 +3,8 @@ $(document).ready(function() {
     return rating.type;
   });
 
-  console.log(ratingTypes);
-
   // make variables to store margin, width, and height
-  const margin = { top: 50, right: 5, bottom: 50, left: 100 };
+  const margin = { top: 50, right: 20, bottom: 50, left: 150 };
   const fullWidth = 500;
   const fullHeight = 500;
   const width = fullWidth - margin.right - margin.left;
@@ -33,6 +31,7 @@ $(document).ready(function() {
   const barHolder = svg.append("g").classed("bar-holder", true);
 
   barHolder
+    .attr("font-size", 20)
     .selectAll("rect.bar")
     .data(ratings)
     .enter()
@@ -45,7 +44,11 @@ $(document).ready(function() {
     .attr("y", function(d) {
       return typeScale(d.type);
     })
-    .attr("height", bandwidth);
+    .attr("height", bandwidth)
+    .style("fill", function(d, i) {
+      return `rgb(${255 - Math.round(d.avg * 25.5)},
+        ${255 - Math.round(d.avg * 25.5)}, 255)`;
+    });
 
   const xAxis = d3.axisBottom(ratingScale);
   const yAxis = d3.axisLeft(typeScale);
@@ -57,4 +60,7 @@ $(document).ready(function() {
     .call(xAxis);
 
   svg.append("g").classed("y axis", true).call(yAxis);
+
+  svg.select(".x.axis").selectAll("text").style("font-size", "16px");
+  svg.select(".y.axis").selectAll("text").style("font-size", "16px");
 });

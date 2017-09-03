@@ -23,23 +23,23 @@ const VoteSchema = Schema({
     min: 0,
     max: 10,
     required: true
+  },
+  speed: {
+    type: Number,
+    required: true
+  },
+  durability: {
+    type: Number,
+    required: true
+  },
+  energyProjections: {
+    type: Number,
+    required: true
+  },
+  likeability: {
+    type: Number,
+    required: true
   }
-  // speedRating: {
-  //   type: Number,
-  //   required: true
-  // },
-  // durabilityRating: {
-  //   type: Number,
-  //   required: true
-  // },
-  // energyProjectionRating: {
-  //   type: Number,
-  //   required: true
-  // },
-  // likeabilityRating: {
-  //   type: Number,
-  //   required: true
-  // }
 });
 
 const Vote = mongoose.model("Vote", VoteSchema);
