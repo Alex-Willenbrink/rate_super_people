@@ -14,10 +14,10 @@ router.get(
   persistUserViewInfo,
   persistUserVoteInfo,
   async (req, res) => {
+    console.log("starting");
     try {
       const superPerson = await Superperson.findById(req.params.superId);
       const ratings = await getSuperPersonRatings(req.params.superId);
-      console.log("ratings: ", ratings);
 
       return res.render("superperson", {
         superPerson,
@@ -37,7 +37,7 @@ router.post("/:superId", async (req, res) => {
 
   try {
     await createOrUpdateUserVote(voterId, superpersonId, voteRatings);
-    return res.redirect(`/superpeople/${superId}`);
+    return res.redirect(`/superpeople/${superpersonId}`);
   } catch (err) {
     return res.send(err);
   }
