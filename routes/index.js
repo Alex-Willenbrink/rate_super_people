@@ -16,7 +16,6 @@ router.get("/", persistUserViewInfo, (req, res) => {
 
 router.post("/", async (req, res) => {
   let superName = req.body.search;
-  console.log(superName);
   if (!superName) return redirect("/");
 
   try {

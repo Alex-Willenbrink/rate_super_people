@@ -14,7 +14,6 @@ router.get(
   persistUserViewInfo,
   persistUserVoteInfo,
   async (req, res) => {
-    console.log("starting");
     try {
       const superPerson = await Superperson.findById(req.params.superId);
       const ratings = await getSuperPersonRatings(req.params.superId);

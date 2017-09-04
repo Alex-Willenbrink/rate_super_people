@@ -89,7 +89,7 @@ const createOrUpdateUserVote = async (voterId, superpersonId, voteRatings) => {
         vote
       );
     } else {
-      vote = await vote.save();
+      vote = await new Vote(vote).save();
     }
   } catch (e) {
     throw e;

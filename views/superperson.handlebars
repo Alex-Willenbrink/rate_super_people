@@ -3,17 +3,14 @@
     <div class="panel-body">
 
       <div class="col-xs-6">
-        <h2 text="text-center">{{superPerson.name}}</h2>
-        <img src="{{superPerson.largeImageUrl}}" />
+        <h2 class="text-center">{{superPerson.name}}</h2>
+        <img class="img-responsive center-block" src="{{superPerson.largeImageUrl}}" />
         <p>{{superPerson.description}}</p>
       </div>
 
       <div class="col-xs-6">
         {{#if ratings.length}}
         <h3 class="text-center">Super Person Ratings</h3>
-        <p>
-          Total Votes: {{ratings.length}}
-        </p>
 
         <div id="ratings-bar-graph">
 
@@ -33,9 +30,9 @@
 
 {{#if user}}
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-10">
       <form action="/superpeople/{{superPerson._id}}" method="post">
-        <h4>Please Enter Super Ratings</h4>
+        <h4>Your Super Ratings</h4>
         {{#each user.vote as |vote|}}
         <div class="form-group">
           <div class="row">
