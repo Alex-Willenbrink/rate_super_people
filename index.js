@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 require("./config")(DB_URL);
 
 // seed database with real super people
-require("./seeds/superpeople")(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY);
+// require("./seeds/superpeople")(MARVEL_PUBLIC_KEY, MARVEL_PRIVATE_KEY);
 // //
 // // // seed database with fake users
 // const seedUsers = require("./seeds/users");
