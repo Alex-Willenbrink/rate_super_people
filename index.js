@@ -70,8 +70,8 @@ const superpeopleRoutes = require("./routes/superpeople");
 app.use("/superpeople", superpeopleRoutes);
 
 // Start ze server
-const port = 3000;
+app.set("port", process.env.PORT || 3000);
 
-app.listen(port, () => {
+app.listen(app.get("port"), () => {
   console.log("Listening for Superpeople");
 });
