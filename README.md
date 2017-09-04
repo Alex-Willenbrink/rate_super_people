@@ -1,49 +1,38 @@
-# jul-furry-winner
+# Rate Super People
 
-Hackaton End of Week 6. GET CRAZY CODING!
+Project Summary:
 
-**IMPORTANT: Modify this file to add description to how we will start/use your app.**
+In the superhero community there are a great number of arguments which circulate around character power levels. Who is the smartest? Who is the stretchiest?
 
-Made by Alex Willenbrink
+The unfortunate reality is that power levels are difficult to quantity because they vary so much from comic to comic for a specific character. Because there’s so much information for a character, it’s difficult to give a definitive answer to this question from one source. However, what if we took another approach and cumulated votes from multiple sources? This is exactly what I propose as a solution to this problem.
 
-// npm install
-// get marvel api
-// get mlab up and running
+I've make an application where users vote on a set of attributes for each superhero. These results are averaged out across the community on the main page of each superhero, where everybody (regardless of signed in or not) will be able to see a superhero’s rated power levels.
 
+Heroku Demo Link: https://rate-super-people.herokuapp.com/
 
-1. Clone from pushed repo
-2. from root directory of project, run "npm i"
-3. Create a file  of ".env" filetype on the root of the project
-4. In the created .env file there should be 3 different variables set up like so:
+How to Enjoy Application:
 
-// .env =>
-DB_URL=mongodb://admin:admin@ds157873.mlab.com:57873/super_people
-MARVEL_PUBLIC_KEY=da1542dcdf037da3f620cc5922
-MARVEL_PRIVATE_KEY=c07b08dc12d66083bbc005abc83b5aa1
+From the main page, there are a few options. You can register an account, login to an account, or search directly for super people in the search bar at the top.
 
-5. Use "mlab" for setting up the database. Go to this link: https://mlab.com/signup/
+Registering an account is quite easy. Simply navigate to the registration page and enter an unused email with a corresponding password. Afterwards, you'll be redirected to the login page, where you can login with the newly created account with the same credentials.
 
-Sign up for an account and login.
+To search for super people, simply enter a super person, or part of a super person (partial entries will also work) into the search bar and hit the "Search" button. All results will be displayed to the user in table format. Clicking on the name of the super person will take the user to the page of the super person.
 
-From the login page, hit the "+ create new" button. Use the "SANDBOX" plan type with amazon services and continue. Select US East as your region and then hit continue. Call the database: "super_people" and continue.
+From a specific super person page, the average votes for each attribute of the super person are displayed, along with a picture of the super person and description (if they exist).
 
-From here, you need to hit the "Users" option and then hit the "Add a database user". For all the options provided input "admin" for all credentials so easy to remember.
+Furthermore, if the user is logged in, they have the option to vote on attributes for that particular super person. If the user has never voted before on that particular super person, all attributes will be set to the default of ranking 5. If the user has voted, the last set of voting results will be displayed, which the user can change to their liking.
 
-Use the MONGODB URI provided above with the new user credentials you've just entered to create the DB_URL.
+Emphasized Technologies:
+  1. Mongoose ORM (MongoDB)
+  2. Local Passport (Authentication)
+  3. Usage of Marvel API
 
-So this:
-mongodb://<dbuser>:<dbpassword>@ds159033.mlab.com:59033/efefe
+Interesting Technical Components:
 
-Becomes this:
-mongodb://admin:admin@ds157873.mlab.com:57873/super_people
+Seeding the database with marvel super people presented an interesting challenge. The marvel API only allows a limit of 100 results per query, so I had to implement an async do/while loop to keep querying until the results returning were less than 100. I also modified this seeding process so that the user could choose to seed the database with an X number of super people if they didn't need to seed the database with the entirety of the marvel database (which takes a while to go through).
 
+I used handlebars as my view rendering engine which presented a few interesting challenges.
 
-Click on your new database and to connect to it, you'll have to copy the
+  1. I made a d3 bar graph on the super person page to display ratings, but needed a way to actually pass the ratings info to the front end javascript. To fix this, I passed the data as an encoded URI component, which I then decoded through an intermediary script and voila, I could use the data in my bar graph.
 
-6. Obtain information for the Marvel public and private keys. You'll need to make an account first from this link:
-https://secure.marvel.com/user/register
-
-Afterwards, follow the instructions on this link.
-https://developer.marvel.com/documentation/getting_started
-
-Instructions aren't that great on the link, but there should be a "Get a Key" option at the top of the page after you register with an account. Just accept the terms and conditions and you should get the keys.
+  2. For displaying rating types, I originally displayed this info through displaying a rating type, and copying and pasting the format for the other rating types. This quickly became unmanagable and obviously a problem if I wanted to increase scale of the project and add more attributes. To solve this, I put the ratings into an array and looped over this info in handlebars to display it.
